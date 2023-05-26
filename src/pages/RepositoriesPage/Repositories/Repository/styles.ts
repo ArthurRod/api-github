@@ -11,7 +11,7 @@ export const Container = styled.div`
   padding: 1rem;
 
   @media screen and (min-width: ${(props) => props.theme.breakpoints.lg}) {
-    width: calc(33% - 1.1rem);
+    width: calc(33% - 20px);
   }
 `;
 
