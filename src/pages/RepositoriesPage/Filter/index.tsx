@@ -1,20 +1,27 @@
 import { X } from "phosphor-react";
 
-import { Lang } from "../../../types/Lang";
+import { Language } from "../../../types/Language";
 import { Cleaner, Container, Selector } from "./styles";
 
-export function Filter() {
-  const langs = [
-    { name: "JavaScript", count: 5, color: "#f1c40f" },
-    { name: "TypeScript", count: 2, color: "#3498db" },
-    { name: "Java", count: 1, color: "#95a5a6" },
-  ];
+interface FilterProps {
+  languages: Language[];
+  currentLanguage?: string;
+  onclick?: (currentLanguage: string | undefined) => void;
+}
 
-  const selectors = langs.map((lang: Lang, index: number) => {
-    const { name, count, color } = lang;
+export function Filter({ languages, currentLanguage, onclick }: FilterProps) {
+  const selectors = languages.map((language: Language, index: number) => {
+    const { name, count, color } = language;
 
     return (
-      <Selector key={index} color={color}>
+      <Selector
+        key={index}
+        color={color}
+        className={
+          currentLanguage && currentLanguage === name ? "selected" : ""
+        }
+        onClick={() => onclick && onclick(name)}
+      >
         <span>{name}</span>
         <span>{count}</span>
       </Selector>
@@ -24,9 +31,11 @@ export function Filter() {
   return (
     <Container>
       {selectors}
-      <Cleaner>
-        Limpar <X size={15} />
-      </Cleaner>
+      {currentLanguage && (
+        <Cleaner onClick={() => onclick && onclick(undefined)}>
+          Limpar <X size={15} />
+        </Cleaner>
+      )}
     </Container>
   );
 }

@@ -6,37 +6,46 @@ import {
 } from "phosphor-react";
 
 import { Container, Avatar, Header, Login, Name, Inner, Data } from "./styles";
+import { User } from "../../../types/User";
 
-export function Profile() {
+interface ProfileProps {
+  user: User;
+}
+
+export function Profile({ user }: ProfileProps) {
   return (
     <Container>
       <Header>
-        <Avatar
-          src="https://avatars.githubusercontent.com/u/62612459?v=4"
-          alt="Arthur Rodrigues"
-        />
-        <Login>ArthurRod</Login>
-        <Name>Arthur Rodrigues</Name>
+        <Avatar src={user.avatar_url} alt={user.name} />
+        <Login>{user.login}</Login>
+        <Name>{user.name}</Name>
       </Header>
       <Inner>
         <Data>
           <Users size={20} />
-          18&nbsp;<i>Seguidores</i>&nbsp;&middot;&nbsp;23&nbsp;<i>Seguindo</i>
+          {user.followers}&nbsp;<i>Seguidores</i>&nbsp;&middot;&nbsp;
+          {user.following}&nbsp;<i>Seguindo</i>
         </Data>
-        <Data>
-          <SuitcaseSimple size={20} />
-          @SiriusDigitalAgencia
-        </Data>
-        <Data>
-          <Buildings size={20} />
-          Sete Lagoas, Minas Gerais
-        </Data>
-        <Data>
-          <LinkSimpleHorizontal size={20} />
-          <a href="https://devsamurai.com.br" target="_blank">
-            devsamurai.com.br
-          </a>
-        </Data>
+        {user.company && (
+          <Data>
+            <SuitcaseSimple size={20} />
+            {user.company}
+          </Data>
+        )}
+        {user.location && (
+          <Data>
+            <Buildings size={20} />
+            {user.location}
+          </Data>
+        )}
+        {user.blog && (
+          <Data>
+            <LinkSimpleHorizontal size={20} />
+            <a href={`\\${user.blog}`} target="_blank">
+              {user.blog}
+            </a>
+          </Data>
+        )}
       </Inner>
     </Container>
   );
