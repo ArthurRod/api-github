@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
-import { Button, Container, Form, Input, Logo, Title } from "./styles";
 import githubLogo from "../../assets/svg/github-logo.svg";
+
+import { Button, Container, Form, Input, Logo, Title } from "./styles";
 
 export function MainPage() {
   const [login, setLogin] = useState("");

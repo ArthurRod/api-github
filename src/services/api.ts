@@ -1,5 +1,29 @@
+import axios from "axios";
+
 import { RepositoryType } from "../types/RepositoryType";
 import { langColors } from "./config";
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+});
+
+export async function getUser(login: string) {
+  try {
+    const response = await api.get(`/users/${login}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getRepos(login: string) {
+  try {
+    const response = await api.get(`/users/${login}/repos`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export function getLangsFrom(repositories: RepositoryType[]) {
   let stats: any = repositories
@@ -24,3 +48,5 @@ export function getLangsFrom(repositories: RepositoryType[]) {
 
   return stats;
 }
+
+export default api;

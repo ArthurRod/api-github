@@ -1,5 +1,6 @@
 import { langColors } from "../../../../services/config";
 import { RepositoryType } from "../../../../types/RepositoryType";
+
 import { Container, Description, Footer, Lang, Name, Link } from "./styles";
 
 interface RepositoryProps {

@@ -5,8 +5,9 @@ import {
   LinkSimpleHorizontal,
 } from "phosphor-react";
 
-import { Container, Avatar, Header, Login, Name, Inner, Data } from "./styles";
 import { User } from "../../../types/User";
+
+import { Container, Avatar, Header, Login, Name, Inner, Data } from "./styles";
 
 interface ProfileProps {
   user: User;
